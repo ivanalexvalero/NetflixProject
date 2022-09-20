@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4F62D70528D2867D00EFB278 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F62D70428D2867D00EFB278 /* HomeViewController.swift */; };
+		4F62D70728D2869200EFB278 /* UpcomingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F62D70628D2869200EFB278 /* UpcomingViewController.swift */; };
+		4F62D70928D286A300EFB278 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F62D70828D286A300EFB278 /* SearchViewController.swift */; };
+		4F62D70B28D286BF00EFB278 /* DownloadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F62D70A28D286BF00EFB278 /* DownloadViewController.swift */; };
+		4F65CE4028D9068B0081A8EB /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F65CE3F28D9068B0081A8EB /* UIColor+Extension.swift */; };
+		4F65CE4528D938E70081A8EB /* CollectionViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F65CE4428D938E70081A8EB /* CollectionViewTableViewCell.swift */; };
+		4FDB9F2228D2379B00C8FE86 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB9F1B28D2379B00C8FE86 /* MainTabBarViewController.swift */; };
 		4FFF296B28CFF4A70045D90F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFF296A28CFF4A70045D90F /* AppDelegate.swift */; };
 		4FFF296D28CFF4A70045D90F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFF296C28CFF4A70045D90F /* SceneDelegate.swift */; };
 		4FFF296F28CFF4A70045D90F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFF296E28CFF4A70045D90F /* ViewController.swift */; };
@@ -16,6 +23,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4F62D70428D2867D00EFB278 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		4F62D70628D2869200EFB278 /* UpcomingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpcomingViewController.swift; sourceTree = "<group>"; };
+		4F62D70828D286A300EFB278 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		4F62D70A28D286BF00EFB278 /* DownloadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadViewController.swift; sourceTree = "<group>"; };
+		4F65CE3F28D9068B0081A8EB /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
+		4F65CE4428D938E70081A8EB /* CollectionViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewTableViewCell.swift; sourceTree = "<group>"; };
+		4FDB9F1B28D2379B00C8FE86 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		4FFF296728CFF4A70045D90F /* NetflixProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NetflixProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FFF296A28CFF4A70045D90F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4FFF296C28CFF4A70045D90F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -37,6 +51,44 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4F65CE3E28D906670081A8EB /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				4F65CE3F28D9068B0081A8EB /* UIColor+Extension.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		4F65CE4128D936410081A8EB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4F65CE4428D938E70081A8EB /* CollectionViewTableViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		4F65CE4228D9364A0081A8EB /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		4F65CE4328D936650081A8EB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		4FDB9F1628D234F200C8FE86 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				4FDB9F1B28D2379B00C8FE86 /* MainTabBarViewController.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
 		4FFF295E28CFF4A70045D90F = {
 			isa = PBXGroup;
 			children = (
@@ -56,6 +108,12 @@
 		4FFF296928CFF4A70045D90F /* NetflixProject */ = {
 			isa = PBXGroup;
 			children = (
+				4F65CE4328D936650081A8EB /* Models */,
+				4F65CE4128D936410081A8EB /* Views */,
+				4F65CE4228D9364A0081A8EB /* ViewModels */,
+				4F65CE3E28D906670081A8EB /* Utils */,
+				4FDB9F1628D234F200C8FE86 /* Main */,
+				4FFF297E28CFF5050045D90F /* Controllers */,
 				4FFF296A28CFF4A70045D90F /* AppDelegate.swift */,
 				4FFF296C28CFF4A70045D90F /* SceneDelegate.swift */,
 				4FFF296E28CFF4A70045D90F /* ViewController.swift */,
@@ -65,6 +123,17 @@
 				4FFF297828CFF4AF0045D90F /* Info.plist */,
 			);
 			path = NetflixProject;
+			sourceTree = "<group>";
+		};
+		4FFF297E28CFF5050045D90F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				4F62D70428D2867D00EFB278 /* HomeViewController.swift */,
+				4F62D70628D2869200EFB278 /* UpcomingViewController.swift */,
+				4F62D70828D286A300EFB278 /* SearchViewController.swift */,
+				4F62D70A28D286BF00EFB278 /* DownloadViewController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,9 +207,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F65CE4528D938E70081A8EB /* CollectionViewTableViewCell.swift in Sources */,
+				4F62D70728D2869200EFB278 /* UpcomingViewController.swift in Sources */,
+				4F62D70928D286A300EFB278 /* SearchViewController.swift in Sources */,
+				4F62D70528D2867D00EFB278 /* HomeViewController.swift in Sources */,
+				4F65CE4028D9068B0081A8EB /* UIColor+Extension.swift in Sources */,
 				4FFF296F28CFF4A70045D90F /* ViewController.swift in Sources */,
 				4FFF296B28CFF4A70045D90F /* AppDelegate.swift in Sources */,
 				4FFF296D28CFF4A70045D90F /* SceneDelegate.swift in Sources */,
+				4F62D70B28D286BF00EFB278 /* DownloadViewController.swift in Sources */,
+				4FDB9F2228D2379B00C8FE86 /* MainTabBarViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
