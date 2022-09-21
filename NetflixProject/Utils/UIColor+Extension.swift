@@ -13,6 +13,6 @@ class ColorExtension {
     
     static let defaultColor = ColorExtension()
     
-    var backgroundColor : UIColor = .systemGray6
+    var backgroundColor : UIColor = .systemBackground
     
 }
