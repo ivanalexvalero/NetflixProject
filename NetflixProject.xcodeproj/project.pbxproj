@@ -13,6 +13,7 @@
 		4F62D70B28D286BF00EFB278 /* DownloadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F62D70A28D286BF00EFB278 /* DownloadViewController.swift */; };
 		4F65CE4028D9068B0081A8EB /* UIColor+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F65CE3F28D9068B0081A8EB /* UIColor+Extension.swift */; };
 		4F65CE4528D938E70081A8EB /* CollectionViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F65CE4428D938E70081A8EB /* CollectionViewTableViewCell.swift */; };
+		4FC7673B28DA1D5C00D0744F /* HeroHeaderUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FC7673A28DA1D5C00D0744F /* HeroHeaderUIView.swift */; };
 		4FDB9F2228D2379B00C8FE86 /* MainTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FDB9F1B28D2379B00C8FE86 /* MainTabBarViewController.swift */; };
 		4FFF296B28CFF4A70045D90F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFF296A28CFF4A70045D90F /* AppDelegate.swift */; };
 		4FFF296D28CFF4A70045D90F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FFF296C28CFF4A70045D90F /* SceneDelegate.swift */; };
@@ -29,6 +30,7 @@
 		4F62D70A28D286BF00EFB278 /* DownloadViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadViewController.swift; sourceTree = "<group>"; };
 		4F65CE3F28D9068B0081A8EB /* UIColor+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extension.swift"; sourceTree = "<group>"; };
 		4F65CE4428D938E70081A8EB /* CollectionViewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewTableViewCell.swift; sourceTree = "<group>"; };
+		4FC7673A28DA1D5C00D0744F /* HeroHeaderUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeroHeaderUIView.swift; sourceTree = "<group>"; };
 		4FDB9F1B28D2379B00C8FE86 /* MainTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarViewController.swift; sourceTree = "<group>"; };
 		4FFF296728CFF4A70045D90F /* NetflixProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NetflixProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FFF296A28CFF4A70045D90F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				4F65CE4428D938E70081A8EB /* CollectionViewTableViewCell.swift */,
+				4FC7673A28DA1D5C00D0744F /* HeroHeaderUIView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -215,6 +218,7 @@
 				4FFF296F28CFF4A70045D90F /* ViewController.swift in Sources */,
 				4FFF296B28CFF4A70045D90F /* AppDelegate.swift in Sources */,
 				4FFF296D28CFF4A70045D90F /* SceneDelegate.swift in Sources */,
+				4FC7673B28DA1D5C00D0744F /* HeroHeaderUIView.swift in Sources */,
 				4F62D70B28D286BF00EFB278 /* DownloadViewController.swift in Sources */,
 				4FDB9F2228D2379B00C8FE86 /* MainTabBarViewController.swift in Sources */,
 			);
