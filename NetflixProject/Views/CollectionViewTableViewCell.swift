@@ -11,14 +11,14 @@ class CollectionViewTableViewCell: UITableViewCell {
 
     
     static let kId = "CollectionViewTableViewCell"
-    
+    private var trendingModel: [TrendingAllDayModel.Result] = []
     
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: 140, height: 200)
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.register(ImageCoverCell.self, forCellWithReuseIdentifier: ImageCoverCell.kId)
         return collectionView
     }()
     
@@ -47,16 +47,12 @@ class CollectionViewTableViewCell: UITableViewCell {
         collectionView.dataSource = self
     }
     
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//        // Initialization code
-//    }
-//
-//    override func setSelected(_ selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
-//
-//        // Configure the view for the selected state
-//    }
+    func configCollection(with trendingModel: TrendingAllDayModel.Result) {
+        self.trendingModel = [trendingModel]
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+     }
 
 }
 
@@ -64,12 +60,13 @@ class CollectionViewTableViewCell: UITableViewCell {
 extension CollectionViewTableViewCell: UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return trendingModel.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCoverCell.kId, for: indexPath) as? ImageCoverCell else { return UICollectionViewCell() }
         cell.backgroundColor = .red
+        cell.configImageCover(with: trendingModel[indexPath.row].posterPath ?? "title")
         return cell
     }
     

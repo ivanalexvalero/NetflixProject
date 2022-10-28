@@ -7,16 +7,25 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+enum Sections: Int {
+    case PeliculasPopulares = 0
+//    case ContinuarViendo = 1
+//    case Tendencias = 2
+}
 
-    let sectionTitle: [String] = ["Volver a verlo", "Continuar viendo", "Tendencias", "Popular en Netflix", "Mi lista"]
+class HomeViewController: UIViewController {
+    
+    lazy var presenter = HomePresenter(delegate: self)
+    private var objectList: [[Any]] = []
+
+    let sectionTitle: [String] = ["Películas populares", "Continuar viendo", "Tendencias", "Popular en Netflix", "Mi lista"]
     
     private let homeFeedTable: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
         table.register(CollectionViewTableViewCell.self, forCellReuseIdentifier: CollectionViewTableViewCell.kId)
         return table
     }()
-    
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,6 +33,10 @@ class HomeViewController: UIViewController {
         view.addSubview(homeFeedTable)
         configHomeFeedTable()
         configNavBar()
+        
+        Task {
+            await presenter.getHomeObjects()
+        }
         
     }
     
@@ -73,6 +86,17 @@ class HomeViewController: UIViewController {
     @objc func leftButtonNavBar(_ sende: UIBarButtonItem) {
         print("lefButton")
     }
+    
+    private func getTrendingMovie() async throws -> TrendingAllDayModel {
+        do {
+            let model = try await ServiceLayer.callService(RequestModel(endpoint: .trendingAll), TrendingAllDayModel.self)
+            return model
+        } catch {
+            print(error)
+            throw error
+        }
+    }
+    
 }
 
 
@@ -80,17 +104,47 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return sectionTitle.count
+//        return objectList.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return objectList[section].count
         return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: CollectionViewTableViewCell.kId, for: indexPath) as? CollectionViewTableViewCell else {
-            return UITableViewCell()
-        }
-        return cell
+//        let item = objectList[indexPath.section]
+//        if let trendingAll = item as? [TrendingAllDayModel.Result] {
+//            guard let cell = tableView.dequeueReusableCell(withIdentifier: CollectionViewTableViewCell.kId, for: indexPath) as? CollectionViewTableViewCell else {
+//                    return UITableViewCell()
+//            }
+//            cell.configCollection(with: trendingAll[indexPath.row])
+//            return cell
+//        }
+//        return UITableViewCell()
+        
+        //
+        
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: CollectionViewTableViewCell.kId, for: indexPath) as? CollectionViewTableViewCell else {
+                    return UITableViewCell()
+            }
+            
+            switch indexPath.section {
+            case Sections.PeliculasPopulares.rawValue:
+                let item = objectList
+                if let trendingAll = item as? [TrendingAllDayModel.Result] {
+                    cell.configCollection(with: trendingAll)
+                }
+            
+                
+            default:
+                return UITableViewCell()
+            }
+            
+            
+            return cell
+       
+        
         
     }
     
@@ -100,6 +154,14 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let header = view as? UITableViewHeaderFooterView else { return }
+        header.textLabel?.font = .systemFont(ofSize: 14, weight: .bold)
+        header.textLabel?.frame = CGRect(x: header.bounds.origin.x + 20, y: header.bounds.origin.y, width: 100, height: header.bounds.height)
+        header.textLabel?.textColor = .label
+        header.textLabel?.text = header.textLabel?.text?.capitalizedSentence
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -113,4 +175,15 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
         navigationController?.navigationBar.transform = .init(translationX: 0, y: min(0, -offset))
     }
     
+}
+
+
+extension HomeViewController: HomeViewProtocol {
+    func getData(list: [[Any]]) {
+        objectList = list
+        print("List: ", list)
+        DispatchQueue.main.async {
+            self.homeFeedTable.reloadData()
+        }
+    }
 }
