@@ -9,16 +9,18 @@ import UIKit
 
 enum Sections: Int {
     case PeliculasPopulares = 0
-//    case ContinuarViendo = 1
-//    case Tendencias = 2
+    case ProxLanzamientos = 1
+    case TvsPopulares = 2
 }
 
 class HomeViewController: UIViewController {
     
     lazy var presenter = HomePresenter(delegate: self)
     private var objectList: [[Any]] = []
+    let viewModel = MoviesViewModel()
+    let movieModel: [TrendingAllDayModel.Result] = []
 
-    let sectionTitle: [String] = ["Películas populares", "Continuar viendo", "Tendencias", "Popular en Netflix", "Mi lista"]
+    let sectionTitle: [String] = ["Películas populares", "Próximos lanzamientos", "Tvs Populares", "Popular en Netflix", "Mi lista"]
     
     private let homeFeedTable: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
@@ -33,6 +35,7 @@ class HomeViewController: UIViewController {
         view.addSubview(homeFeedTable)
         configHomeFeedTable()
         configNavBar()
+        getData()
         
         Task {
             await presenter.getHomeObjects()
@@ -87,15 +90,34 @@ class HomeViewController: UIViewController {
         print("lefButton")
     }
     
-    private func getTrendingMovie() async throws -> TrendingAllDayModel {
-        do {
-            let model = try await ServiceLayer.callService(RequestModel(endpoint: .trendingAll), TrendingAllDayModel.self)
-            return model
-        } catch {
-            print(error)
-            throw error
+//    private func getTrendingMovie() async throws -> TrendingAllDayModel {
+//        do {
+//            let model = try await ServiceLayer.callService(RequestModel(endpoint: .trendingAll), TrendingAllDayModel.self)
+//            return model
+//        } catch {
+//            print(error)
+//            throw error
+//        }
+//    }
+    
+    func getData() {
+        viewModel.fetchMovies {
+            DispatchQueue.main.async {
+                self.homeFeedTable.reloadData()
+            }
+        } failure: {
+            
         }
+//        viewModel.fetchTvs {
+//            DispatchQueue.main.async {
+//                self.homeFeedTable.reloadData()
+//            }
+//        } failure: {
+//
+//        }
+
     }
+    
     
 }
 
@@ -124,25 +146,45 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 //        return UITableViewCell()
         
         //
-        
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: CollectionViewTableViewCell.kId, for: indexPath) as? CollectionViewTableViewCell else {
-                    return UITableViewCell()
-            }
-            
-            switch indexPath.section {
-            case Sections.PeliculasPopulares.rawValue:
-                let item = objectList
-                if let trendingAll = item as? [TrendingAllDayModel.Result] {
-                    cell.configCollection(with: trendingAll)
-                }
-            
-                
-            default:
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: CollectionViewTableViewCell.kId, for: indexPath) as? CollectionViewTableViewCell else {
                 return UITableViewCell()
+        }
+        
+        
+        switch indexPath.section {
+        case Sections.PeliculasPopulares.rawValue:
+
+            let movMod = viewModel.movies
+            cell.configCollection(with: movMod)
+
+        case Sections.PeliculasPopulares.rawValue:
+            viewModel.upComingMovies { result in
+                switch result {
+                case let .success(upComing):
+                    cell.configCollection(with: upComing)
+                case let .failure(error):
+                    print(error.localizedDescription)
+                }
             }
             
+        case Sections.TvsPopulares.rawValue:
+            viewModel.fetchTvs { result in
+                switch result {
+                case let .success(movieData):
+                    cell.configCollection(with: movieData)
+                case let .failure(error):
+                    print(error.localizedDescription)
+                }
+            }
             
-            return cell
+        
+
+        default:
+            return UITableViewCell()
+        }
+        
+        
+        return cell
        
         
         
@@ -181,9 +223,9 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
 extension HomeViewController: HomeViewProtocol {
     func getData(list: [[Any]]) {
         objectList = list
-        print("List: ", list)
-        DispatchQueue.main.async {
-            self.homeFeedTable.reloadData()
-        }
+//        print("List: ", list)
+//        DispatchQueue.main.async {
+//            self.homeFeedTable.reloadData()
+//        }
     }
 }

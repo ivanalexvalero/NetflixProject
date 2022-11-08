@@ -23,7 +23,7 @@ struct TrendingAllDayModel: Decodable {
         let id: Int?
         let name: String?
 //        let originalLanguage: String?
-//        let originalName: String?
+        let originalName: String?
 //        let overview,
         let posterPath: String?
 //        let mediaType: MediaType?
@@ -33,6 +33,7 @@ struct TrendingAllDayModel: Decodable {
 //        let voteAverage: Double?
 //        let voteCount: Int?
 //        let originCountry: [String]?
+        let originalTitle: String?
 //        let title, originalTitle, releaseDate: String?
 //        let video: Bool?
 
@@ -40,7 +41,7 @@ struct TrendingAllDayModel: Decodable {
             case id
             case name
 //            case originalLanguage = "original_language"
-//            case originalName = "original_name"
+            case originalName = "original_name"
 //            case overview
             case posterPath = "poster_path"
 //            case mediaType = "media_type"
@@ -51,7 +52,7 @@ struct TrendingAllDayModel: Decodable {
 //            case voteCount = "vote_count"
 //            case originCountry = "origin_country"
 //            case title
-//            case originalTitle = "original_title"
+            case originalTitle = "original_title"
 //            case releaseDate = "release_date"
 //            case video
         }
@@ -71,10 +72,22 @@ struct TrendingAllDayModel: Decodable {
                 self.name = nil
             }
             
+            if let originalName = try? container.decode(String.self, forKey: .originalName){
+                self.originalName = originalName
+            }else {
+                self.originalName = nil
+            }
+            
             if let posterPath = try? container.decode(String.self, forKey: .posterPath){
                 self.posterPath = posterPath
             }else {
                 self.posterPath = nil
+            }
+            
+            if let originalTitle = try? container.decode(String.self, forKey: .originalTitle){
+                self.originalTitle = originalTitle
+            }else {
+                self.originalTitle = nil
             }
         }
         

@@ -11,7 +11,7 @@ class CollectionViewTableViewCell: UITableViewCell {
 
     
     static let kId = "CollectionViewTableViewCell"
-    private var trendingModel: [TrendingAllDayModel.Result] = []
+    private var trendingModel: [TrendingAllDayModel.Result] = [TrendingAllDayModel.Result]()
     
     private let collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -45,12 +45,13 @@ class CollectionViewTableViewCell: UITableViewCell {
     private func configCollectionView() {
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.reloadData()
     }
     
-    func configCollection(with trendingModel: TrendingAllDayModel.Result) {
-        self.trendingModel = [trendingModel]
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
+    public func configCollection(with trendingModel: [TrendingAllDayModel.Result]) {
+        self.trendingModel = trendingModel
+        DispatchQueue.main.async { [weak self] in
+            self?.collectionView.reloadData()
         }
      }
 
@@ -61,12 +62,19 @@ extension CollectionViewTableViewCell: UICollectionViewDelegate, UICollectionVie
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return trendingModel.count
+//        return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ImageCoverCell.kId, for: indexPath) as? ImageCoverCell else { return UICollectionViewCell() }
         cell.backgroundColor = .red
-        cell.configImageCover(with: trendingModel[indexPath.row].posterPath ?? "title")
+        
+        guard let model = trendingModel[indexPath.row].posterPath else {
+            return UICollectionViewCell()
+            
+        }
+//        print("image",model)
+        cell.configImageCover(with: model)
         return cell
     }
     

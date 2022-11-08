@@ -33,8 +33,9 @@ class ImageCoverCell: UICollectionViewCell {
     }
     
     public func configImageCover(with model: String) {
-        guard let url = URL(string: "https://image.tmdb.org/t/p/w500\(model)") else { return }
+        guard let url = URL(string: "https://image.tmdb.org/t/p/w500/\(model)") else { return }
         imageCover.kf.setImage(with: url)
+//        print(url)
     }
     
 }

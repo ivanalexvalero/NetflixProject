@@ -15,7 +15,7 @@ class ServiceLayer {
         var serviceUrl = URLComponents(string: requestModel.getURL())
         serviceUrl?.queryItems = buildQueryItems(params: requestModel.queryItems ?? [:])
         serviceUrl?.queryItems?.append(URLQueryItem(name: "api_key", value: Constants.apiKey))
-        print(serviceUrl)
+//        print(serviceUrl)
         
         //Unwrap URL
         guard let componentURL = serviceUrl?.url else {
